@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001
 app.use(express.json());
 app.use(cors())
 
-require('./routes/.route')(app)
+// require('./routes/.route')(app)
 
 http.listen(PORT, () =>
   console.log(`Express server is running on localhost:${PORT}`)
