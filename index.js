@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 3001
 app.use(express.json());
 app.use(cors())
 
-// require('./routes/.route')(app)
 
 http.listen(PORT, () =>
   console.log(`Express server is running on localhost:${PORT}`)
@@ -21,8 +20,6 @@ http.listen(PORT, () =>
 
 io.on('connection', socket =>{
     console.log(`client ${socket.id} connected`)
-
-    socket.on("ATTACK")
 
     socket.on('disconnect',() => {
         console.log(`client ${socket.id} disconnected`)

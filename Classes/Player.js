@@ -5,6 +5,5 @@ class Player {
         this.life = 30
         this.board = []
         this.hand = []
-
     }
 }

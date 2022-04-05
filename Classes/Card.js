@@ -1,4 +1,3 @@
-
 class Card {
     constructor(name,power,life){
         this.name = name
