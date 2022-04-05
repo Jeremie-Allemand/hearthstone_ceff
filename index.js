@@ -1,6 +1,5 @@
 const cors = require('cors')
 const express = require('express')
-const { createSocket } = require('dgram')
 const app = express();
 const http = require('http').Server(app)
 const io = require('socket.io')(http,{
@@ -22,6 +21,8 @@ http.listen(PORT, () =>
 
 io.on('connection', socket =>{
     console.log(`client ${socket.id} connected`)
+
+    socket.on("ATTACK")
 
     socket.on('disconnect',() => {
         console.log(`client ${socket.id} disconnected`)
