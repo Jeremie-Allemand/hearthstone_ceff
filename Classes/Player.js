@@ -1,8 +1,8 @@
-function Player(name,socket) {
+function Player(name,socketId){
     this.name = name
-    this.socket = socket
-    this.life = 30
-    this.board = []
-    this.hand = []
-    this.game = null
+    this.socketId = socketId
+    this.gameState = null
+    this.opponent = null
 }
+
+module.exports = Player

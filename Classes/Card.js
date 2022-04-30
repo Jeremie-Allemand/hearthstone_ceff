@@ -3,3 +3,5 @@ function Card(name,power,life){
     this.power = power 
     this.life = life
 }
+
+module.exports = Card

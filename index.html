@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Client</title>
+    </head>
+    <body>
+        <h1 id="socket"></h1>
+        <div id="login">
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username" value=""><br>
+            <button onclick="login()">Login</button><br>
+        </div>
+        
+        <div id="challenge">
+            <label for="opponent">Opponent Socket Id</label><br>
+            <input type="text" id="opponent" name="opponent" value=""><br>
+            <button onclick="challenge()">Challenge</button><br>
+        </div>
+
+        <div id="draw">
+            <button onclick="draw()">Draw</button><br>
+        </div>
+
+        <div id="use_card_div">
+            <label for="card_hand_index">Use Card</label><br>
+            <input type="text" id="card_hand_index" name="card_hand_index" value=""><br>
+            <button onclick="useCard()">Use Card</button><br>
+        </div>
+
+        <div id="attack">
+            <label for="attacker">Attacker</label><br>
+            <input type="text" id="attacker" name="attacker" value=""><br>
+            <label for="target">Target</label><br>
+            <input type="text" id="target" name="target value=""><br>
+            <button onclick="attack()">Attack</button><br>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js" integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            const PORT = 3001
+            server = "http://"+ window.location.hostname + ":" + PORT
+            const socket = io(server)
+
+            function login(){
+               const name = document.getElementById("username").value 
+               socket.emit('login',name)
+            }
+
+            function challenge(){
+               const opponentId = document.getElementById("opponent").value 
+               socket.emit('challenge',opponentId)
+            }
+            function draw(){
+                socket.emit('draw')
+            }
+
+            function useCard(){
+               const usedCardIndex = document.getElementById("target").value 
+               socket.emit('useCard',usedCardIndex)
+            }
+
+            function attack(){
+               const attackerIndex = document.getElementById("attacker").value 
+               const targetIndex = document.getElementById("target").value 
+               socket.emit('attack',attackerIndex,targetIndex)
+            }
+        </script>
+    </body>
+</html>
