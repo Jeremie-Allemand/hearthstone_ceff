@@ -49,12 +49,18 @@ io.on('connection', socket =>{
 
     socket.on('draw', () =>{
       let player = getPlayerWithSocketId(socket.id)
+      let opponent = getPlayerWithSocketId(player.opponent)
       player.gameState.hand.push(player.gameState.deck.shift())
+      io.to(player.socketId).emit('update', {player: player, opponent: opponent})
+      io.to(opponent.socketId).emit('update', {player: opponent, opponent: player})
     })
 
     socket.on('useCard', (cardIndexInHand) =>{
       let player = getPlayerWithSocketId(socket.id)
+      let opponent = getPlayerWithSocketId(player.opponent)
       player.gameState.board.push(player.gameState.hand.splice(cardIndexInHand,1)[0])
+      io.to(player.socketId).emit('update', {player: player, opponent: opponent})
+      io.to(opponent.socketId).emit('update', {player: opponent, opponent: player})
     })
 
     socket.on('attack', (attackerIndex, targetIndex) =>{
@@ -77,6 +83,8 @@ io.on('connection', socket =>{
       console.log("remove")
       console.log(player)
       console.log(opponent)
+      io.to(player.socketId).emit('update', {player: player, opponent: opponent})
+      io.to(opponent.socketId).emit('update', {player: opponent, opponent: player})
     })
 
     socket.on('disconnect',() => {
